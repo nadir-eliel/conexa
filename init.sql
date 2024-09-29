@@ -4,9 +4,9 @@ CREATE TABLE IF NOT EXISTS user_types (
     type_name VARCHAR(50) NOT NULL
 );
 
--- Crear tabla de usuarios
+-- Crear tabla de usuarios sin la función uuid_generate_v4(), ya que se genera en la API
 CREATE TABLE IF NOT EXISTS users (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY,
     username VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
