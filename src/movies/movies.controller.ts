@@ -90,4 +90,20 @@ export class MoviesController {
   remove(@Param('id') id: string) {
     return this.moviesService.remove(+id);
   }
+
+  @ApiOperation({
+    summary: 'Sincroniza las películas de Star Wars con la base de datos',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Películas sincronizadas exitosamente',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'No autorizado. Solo administradores pueden acceder.',
+  })
+  @Post('sync-starwars')
+  async syncMoviesFromStarWarsAPI() {
+    return this.moviesService.syncMoviesFromStarWarsAPI();
+  }
 }
