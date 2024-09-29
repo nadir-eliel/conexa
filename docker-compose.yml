@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: conexuser
+      POSTGRES_PASSWORD: p4ssw0rD
+      POSTGRES_DB: conexa
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
