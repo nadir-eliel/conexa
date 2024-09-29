@@ -62,4 +62,9 @@ export class UsersService {
       throw new NotFoundException(`Usuario con ID ${id} no encontrado`);
     }
   }
+
+  async findByUsername(username: string): Promise<User | undefined> {
+    const user = await this.usersRepository.findOne({ where: { username } });
+    return user;
+  }
 }
