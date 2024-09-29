@@ -6,6 +6,8 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { MoviesModule } from './movies/movies.module';
+import { Movie } from './movies/movie.entity';
 
 @Module({
   imports: [
@@ -17,11 +19,12 @@ import { AppService } from './app.service';
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
-      entities: [User], //TODO: agregar la entidad Movies
+      entities: [User, Movie],
       synchronize: true, // FIXME: tal vez deberia ser false para que no me borre los datos ya guardados (PROD)
     }),
     UsersModule,
     AuthModule,
+    MoviesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
