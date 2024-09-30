@@ -24,8 +24,8 @@ export class User {
   @Column({ unique: true })
   email: string;
 
-  @Column()
-  user_type_id: number;
+  @Column({ name: 'user_type_id' })
+  userTypeId: number;
 
   @CreateDateColumn()
   created_at: Date;

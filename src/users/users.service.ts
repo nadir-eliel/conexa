@@ -36,7 +36,7 @@ export class UsersService {
       username,
       password: hashedPassword,
       email,
-      user_type_id: userTypeId,
+      userTypeId,
     });
     return this.usersRepository.save(user);
   }
