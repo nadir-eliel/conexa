@@ -6,8 +6,13 @@ import {
   Body,
   Patch,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { MoviesService } from './movies.service';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../auth/guards/roles.decorator';
+import { Role } from '../auth/guards/role.enum';
 import { Movie } from './movie.entity';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
@@ -24,6 +29,7 @@ import {
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
 
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Obtener la lista de todas las películas' }) // Resumen del endpoint
   @ApiResponse({
     status: 200,
@@ -35,6 +41,8 @@ export class MoviesController {
     return this.moviesService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Regular)
   @ApiOperation({ summary: 'Obtener los detalles de una película específica' }) // Resumen del endpoint
   @ApiParam({ name: 'id', description: 'ID de la película' }) // Descripción del parámetro
   @ApiResponse({
@@ -48,6 +56,8 @@ export class MoviesController {
     return this.moviesService.findOne(+id);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Administrador)
   @ApiOperation({
     summary: 'Crear una nueva película (solo para administradores)',
   })
@@ -63,6 +73,8 @@ export class MoviesController {
     return this.moviesService.create(createMovieDto);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Administrador)
   @ApiOperation({
     summary:
       'Actualizar la información de una película existente (solo para administradores)',
@@ -80,6 +92,8 @@ export class MoviesController {
     return this.moviesService.update(+id, updateMovieDto);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Administrador)
   @ApiOperation({
     summary: 'Eliminar una película (solo para administradores)',
   })
@@ -91,6 +105,8 @@ export class MoviesController {
     return this.moviesService.remove(+id);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Administrador)
   @ApiOperation({
     summary: 'Sincroniza las películas de Star Wars con la base de datos',
   })
