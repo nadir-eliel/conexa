@@ -1,85 +1,81 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Proyecto de API para Gestión de Usuarios y Películas - NestJS
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Este proyecto es una API desarrollada en **NestJS** que gestiona usuarios y películas, incluyendo autenticación y autorización mediante **JWT**. La API permite a los usuarios (administradores y regulares) realizar diversas acciones sobre los recursos de la base de datos.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Tecnologías Utilizadas
 
-## Description
+- **NestJS**: Framework para Node.js.
+- **TypeORM**: ORM para interactuar con bases de datos relacionales.
+- **PostgreSQL**: Base de datos utilizada.
+- **Docker**: Contenedores para gestionar la base de datos.
+- **JWT (JSON Web Tokens)**: Autenticación y autorización.
+- **Swagger**: Documentación automática de la API.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+## Requisitos previos
 
-```bash
-$ npm install
-```
+Antes de comenzar, asegúrate de tener lo siguiente instalado en tu sistema:
 
-## Compile and run the project
+- **Node.js** (v14 o superior)
+- **Docker** (para levantar la base de datos)
+- **npm** (Node Package Manager)
+
+---
+
+## Configuración del Proyecto
+
+### 1. Clonar el repositorio
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone https://github.com/nadir-eliel/conexa.git
+cd conexa
 ```
 
-## Run tests
+### 2. Instalar dependencias
+Instala las dependencias del proyecto usando el siguiente comando:
 
 ```bash
-# unit tests
-$ npm run test
+npm install
+```
+### 3. Configurar las variables de entorno
+Crea un archivo .env en la raíz del proyecto y asegúrate de definir las siguientes variables, a modo de ejemplo se dejan las mismas que coinciden con el Dockerfile:
 
-# e2e tests
-$ npm run test:e2e
+.env
+```bash
+# Database
+DB_HOST="localhost"
+DB_PORT=5432
+DB_USER="conexuser"
+DB_PASS="p4ssw0rD"
+DB_NAME="conexa"
 
-# test coverage
-$ npm run test:cov
+# JWT
+SECRET_KEY="secretJWT"
+
+# Star Wars API
+STAR_WARS_API="https://swapi.dev/api"
 ```
 
-## Resources
+### 4. Levantar la base de datos con Docker
+Este proyecto usa PostgreSQL como base de datos. Para levantarla con Docker, puedes usar el siguiente comando:
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+docker-compose up --build
+```
+Esto levantará la base de datos PostgreSQL y la inicializará con los valores definidos en el archivo docker-compose.yml.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### 5. Ejecutar el Proyecto
+Para iniciar el servidor NestJS, usa el siguiente comando:
 
-## Support
+```bash
+npm run start:dev
+```
+El servidor estará corriendo en http://localhost:3000.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Documentación de la API
+Esta API utiliza Swagger para generar la documentación automáticamente. Una vez que el servidor esté corriendo, puedes acceder a la documentación en:
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```bash
+http://localhost:3000/api
+```
