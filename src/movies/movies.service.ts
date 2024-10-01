@@ -28,7 +28,6 @@ export class MoviesService {
   }
 
   async create(createMovieDto: CreateMovieDto): Promise<Movie> {
-    // TODO: revisar que la pelicula no exista previamente
     const movie = this.moviesRepository.create(createMovieDto);
     return this.moviesRepository.save(movie);
   }
@@ -62,8 +61,8 @@ export class MoviesService {
         title: film.title,
         year: new Date(film.release_date).getFullYear(),
         director: film.director,
-        genres: ['Sci-Fi', 'Adventure'], //TODO: averiguar los generos
-        score: 8.5, //TODO: creo que esto no se va a usar
+        genres: ['Sci-Fi', 'Adventure'],
+        score: 8.5,
       };
 
       const existingMovie = await this.moviesRepository.findOne({

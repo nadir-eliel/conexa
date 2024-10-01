@@ -30,7 +30,7 @@ export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
 
   @UseGuards(JwtAuthGuard)
-  @ApiOperation({ summary: 'Obtener la lista de todas las películas' }) // Resumen del endpoint
+  @ApiOperation({ summary: 'Obtener la lista de todas las películas' })
   @ApiResponse({
     status: 200,
     description: 'Lista de películas devuelta exitosamente.',
@@ -42,15 +42,15 @@ export class MoviesController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.Regular, Role.Administrador)
-  @ApiOperation({ summary: 'Obtener los detalles de una película específica' }) // Resumen del endpoint
-  @ApiParam({ name: 'id', description: 'ID de la película' }) // Descripción del parámetro
+  @Roles(Role.Regular)
+  @ApiOperation({ summary: 'Obtener los detalles de una película específica' })
+  @ApiParam({ name: 'id', description: 'ID de la película' })
   @ApiResponse({
     status: 200,
     description: 'Detalles de la película devueltos exitosamente.',
     type: Movie,
   })
-  @ApiResponse({ status: 404, description: 'Película no encontrada.' }) // Película no encontrada
+  @ApiResponse({ status: 404, description: 'Película no encontrada.' })
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.moviesService.findOne(+id);

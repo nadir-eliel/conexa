@@ -32,9 +32,7 @@ describe('MoviesController (e2e)', () => {
     await app.init();
   });
 
-  beforeEach(async () => {
-    await usersRepository.query('DELETE FROM users');
-
+  beforeAll(async () => {
     const hashedPassword = await bcrypt.hash('password123', 10);
     const regularUser = await usersRepository.save({
       username: 'regularUser',
@@ -66,6 +64,7 @@ describe('MoviesController (e2e)', () => {
   });
 
   afterAll(async () => {
+    await usersRepository.query('DELETE FROM users');
     await app.close();
   });
 
