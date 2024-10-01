@@ -42,7 +42,7 @@ export class MoviesController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.Regular)
+  @Roles(Role.Regular, Role.Administrador)
   @ApiOperation({ summary: 'Obtener los detalles de una película específica' }) // Resumen del endpoint
   @ApiParam({ name: 'id', description: 'ID de la película' }) // Descripción del parámetro
   @ApiResponse({
